@@ -1,0 +1,20 @@
+{% extends "tree_layout.html" %}
+{% block body %}
+
+		
+	<div style='/static/tree.css'>
+
+		<div class="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+		
+		{{ magic_html }}
+		
+		</div>
+			
+		<div>
+			<img id="male" src="/static/male.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
+			<img id="female" src="/static/female.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
+		</div>
+
+	</div>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+{% endblock %}

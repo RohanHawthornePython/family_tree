@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Login</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('addperson') }}" method=post>
+    <dl>
+      <dt>Full Name:
+      <dd><input type=text name=fullname>
+      <dt>Gender:
+      {% if gender == 'male' %}
+      	<dd><input type=radio name=gender value=male checked>Male
+      {% else %}
+      	<dd><input type=radio name=gender value=male>Male
+      {% endif %}
+      {% if gender == 'female' %}
+      	<dd><input type=radio name=gender value=female checked>Female
+      {% else %}
+      	<dd><input type=radio name=gender value=female>Female
+      {% endif %}
+      <dt>Date of Birth:
+      <dd><input type=calendar name=dob>
+      <dd><input type=submit value=Add>
+    </dl>
+  </form>
+{% endblock %}

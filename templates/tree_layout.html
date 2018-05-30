@@ -1,0 +1,45 @@
+<!doctype html>
+<head>
+<script>
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("icon", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("icon");
+    /* ev.target.appendChild(document.getElementById(data)); */
+    location.replace("/addperson?gender="+data)
+}
+
+function drop_person(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("icon");
+	location.replace("/addrelationship?gender="+data)
+}
+
+</script>
+</head>
+<title>Our Family Tree</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='tree.css') }}">
+<div class=page>
+  <h1>Our Family Tree</h1>
+  <div class=metanav>
+  {% if not session.username and not registering %}
+    <a href="{{ url_for('register') }}">register</a>
+  {% elif registering %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

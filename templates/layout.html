@@ -1,0 +1,19 @@
+<!doctype html>
+<title>Our Family Tree</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <h1>Our Family Tree</h1>
+  <div class=metanav>
+  {% if not session.username and not registering %}
+    <a href="{{ url_for('register') }}">register</a>
+  {% elif registering %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>
